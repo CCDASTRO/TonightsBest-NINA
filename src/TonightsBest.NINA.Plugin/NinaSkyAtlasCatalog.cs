@@ -5,16 +5,29 @@ using TonightsBest.Core;
 
 namespace TonightsBest.NINA.Plugin;
 
-internal sealed class NinaSkyAtlasCatalog(IProfileService profileService) : ISkyAtlasCatalog {
+internal sealed class NinaSkyAtlasCatalog : ISkyAtlasCatalog {
+    private readonly Func<global::NINA.Core.Model.CustomHorizon> horizon;
+    private readonly Func<DatabaseInteraction> database;
+
+    public NinaSkyAtlasCatalog(IProfileService profileService) : this(
+        () => profileService.ActiveProfile.AstrometrySettings.Horizon,
+        () => new DatabaseInteraction()) { }
+
+    internal NinaSkyAtlasCatalog(
+        Func<global::NINA.Core.Model.CustomHorizon> horizon,
+        Func<DatabaseInteraction> database) {
+        this.horizon = horizon;
+        this.database = database;
+    }
+
     public async Task<IReadOnlyList<SkyTarget>> SearchAsync(CancellationToken cancellationToken) {
-        var profile = profileService.ActiveProfile;
         var search = new DatabaseInteraction.DeepSkyObjectSearchParams {
             DsoTypes = Array.Empty<string>(),
             Limit = 1500,
             SearchOrder = new DatabaseInteraction.DeepSkyObjectSearchOrder { Field = "sizemax", Direction = "DESC" }
         };
-        var objects = await new DatabaseInteraction().GetDeepSkyObjects(
-            imageFactory: null!, profile.AstrometrySettings.Horizon, search, cancellationToken).ConfigureAwait(false);
+        var objects = await database().GetDeepSkyObjects(
+            imageFactory: null!, horizon(), search, cancellationToken).ConfigureAwait(false);
         return objects.Select(Map).ToArray();
     }
 

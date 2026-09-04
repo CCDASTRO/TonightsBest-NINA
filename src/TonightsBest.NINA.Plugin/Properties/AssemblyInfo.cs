@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 [assembly: Guid("2B3210D8-342C-473D-9D26-C417A52EF803")]
 [assembly: AssemblyVersion("0.1.0.0")]
@@ -18,4 +19,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyMetadata("ChangelogURL", "https://github.com/CCDASTRO/TonightsBest-NINA/blob/main/CHANGELOG.md")]
 [assembly: AssemblyMetadata("LongDescription", "A dockable Top 15 target-ranking panel using N.I.N.A.'s active location, camera, telescope, Sky Atlas, Moon data, and Framing Assistant.")]
 [assembly: ComVisible(false)]
-
+[assembly: InternalsVisibleTo("TonightsBest.AtlasSmokeTest")]

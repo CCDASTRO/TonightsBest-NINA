@@ -29,3 +29,9 @@ or location data instead of silently substituting defaults.
 Cloud cover, astronomical darkness, horizon masks, meridian limits, and target
 priority can be added as separate score contributors. Weather should remain
 optional: absence of a connected weather source must not prevent target ranking.
+
+## Local Sky Atlas smoke test
+
+The optional `tools/TonightsBest.AtlasSmokeTest` executable queries the installed
+N.I.N.A. database through the same adapter as the plugin. It is intentionally not
+part of CI because a GitHub runner has no `%LOCALAPPDATA%\NINA\NINA.sqlite`.

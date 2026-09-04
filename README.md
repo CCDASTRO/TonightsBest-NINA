@@ -5,6 +5,11 @@ the current night using the active N.I.N.A. profile, equipment, sky atlas, Moon,
 and visibility window. It provides a dockable **Top 15** panel with one-click
 handoff to the Framing Assistant and then the Advanced Sequencer.
 
+[![N.I.N.A. Imaging workspace showing the Tonight's Best Top 15 panel](docs/assets/tonights-best-in-nina.png)](https://ccdastro.github.io/TonightsBest-NINA/)
+
+*Tonight's Best docked in the N.I.N.A. Imaging workspace. Click the image to
+open the one-page guide.*
+
 ## Install
 
 Tonight's Best requires **N.I.N.A. 3.2.0.9001 or later**.

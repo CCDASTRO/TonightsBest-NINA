@@ -2,16 +2,18 @@
 
 Tonight's Best is a N.I.N.A. 3.2 plugin that ranks deep-sky targets for
 the current night using the active N.I.N.A. profile, equipment, sky atlas, Moon,
-and visibility window. The goal is a dockable **Top 15** panel with one-click
+and visibility window. It provides a dockable **Top 15** panel with one-click
 handoff to the Framing Assistant and then the Advanced Sequencer.
 
 ## Status
 
-This repository contains a buildable **0.1.0 development preview** with the
+This repository contains a tested **0.1.0 development preview** with the
 scoring engine, live N.I.N.A. 3.2 adapters, dockable panel, and Framing Assistant
 handoff. It has been compiled, unit tested, queried against an installed N.I.N.A.
-Sky Atlas, and loaded in N.I.N.A. A final test with a connected camera and the
-user's active telescope profile is required before the first public release.
+Sky Atlas, loaded in N.I.N.A., and exercised end to end with connected simulator
+equipment. The verified flow calculated the Top 15, selected Crescent Nebula,
+and populated Framing Assistant with its name, coordinates, and active camera
+and telescope parameters.
 
 ## User workflow
 
@@ -26,7 +28,7 @@ user's active telescope profile is required before the first public release.
 
 ## Scoring model (initial)
 
-The score is deliberately explainable and shown as a breakdown:
+The score is deliberately explainable and retained as a component breakdown:
 
 - visibility above the minimum altitude: 35 points;
 - Moon clearance adjusted by illuminated fraction: 25 points;
@@ -91,7 +93,8 @@ Create an installable development ZIP and manifest with:
 See [installation instructions](docs/INSTALLATION.md) and the
 [scoring reference](docs/SCORING.md). The
 [SDK review](docs/SDK-REVIEW.md) records the official interfaces and plugin
-patterns used by this implementation.
+patterns used by this implementation. See the
+[verification record](docs/VERIFICATION.md) for the automated and in-host checks.
 
 Pushing a four-part version tag such as `v0.1.0.0` runs the release workflow,
 rebuilds and tests the solution, and publishes the installable ZIP plus its
@@ -106,7 +109,7 @@ generated manifest as GitHub release assets.
 - [x] Dockable Top 15 WPF panel
 - [x] Framing Assistant handoff
 - [x] Reproducible development ZIP and manifest generation
-- [ ] Hardware-backed N.I.N.A. integration test
+- [x] N.I.N.A. host integration test with connected simulator equipment
 - [ ] First GitHub release and official plugin-manifest submission
 
 ## License

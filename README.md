@@ -162,7 +162,7 @@ generated manifest as GitHub release assets.
 - [x] Framing Assistant handoff
 - [x] Reproducible development ZIP and manifest generation
 - [x] N.I.N.A. host integration test with connected simulator equipment
-- [ ] First GitHub release and official plugin-manifest submission
+- [x] First GitHub release and official plugin-manifest submission
 
 ## License
 

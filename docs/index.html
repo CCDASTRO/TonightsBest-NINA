@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tonight's Best ranks the best deep-sky imaging targets for your active N.I.N.A. profile, equipment, Moon, and observing window.">
+  <meta name="theme-color" content="#071318">
+  <title>Tonight's Best for N.I.N.A.</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071318;
+      --panel: #0d2026;
+      --panel-2: #102a31;
+      --text: #ecf6f7;
+      --muted: #a9bdc1;
+      --line: #24434a;
+      --accent: #19c6b3;
+      --accent-2: #77e3d5;
+      --warm: #f1c56f;
+      --shadow: 0 18px 55px rgba(0, 0, 0, .32);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 82% 8%, rgba(25, 198, 179, .12), transparent 28rem),
+        linear-gradient(180deg, #071318 0%, #0a181d 52%, #071318 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 36px)); margin: 0 auto; }
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(7, 19, 24, .84);
+      border-bottom: 1px solid rgba(119, 227, 213, .13);
+      backdrop-filter: blur(14px);
+    }
+    .nav-inner { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 750; letter-spacing: -.02em; text-decoration: none; }
+    .mark { width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid var(--accent); border-radius: 50%; color: var(--accent-2); }
+    .mark svg { width: 19px; height: 19px; fill: currentColor; }
+    .nav-links { display: flex; align-items: center; gap: 22px; font-size: .92rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+
+    .hero { padding: 92px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 58px; align-items: center; }
+    .eyebrow { color: var(--accent-2); font-size: .78rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    h1 { max-width: 720px; margin: 14px 0 22px; font-size: clamp(2.8rem, 7vw, 5.8rem); line-height: .98; letter-spacing: -.065em; }
+    .lede { max-width: 650px; margin: 0 0 30px; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel);
+      color: var(--text);
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .button:hover, .button:focus-visible { transform: translateY(-2px); border-color: var(--accent); }
+    .button.primary { border-color: var(--accent); background: var(--accent); color: #03201d; }
+    .button.primary:hover, .button.primary:focus-visible { background: var(--accent-2); }
+
+    .preview { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #0a191e; box-shadow: var(--shadow); }
+    .preview-title { display: flex; justify-content: space-between; padding: 15px 18px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .preview-title strong { color: var(--text); font-size: .94rem; }
+    .equipment { padding: 15px 18px; border-bottom: 1px solid var(--line); color: var(--accent-2); font-size: .82rem; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    th, td { padding: 11px 13px; border-bottom: 1px solid rgba(36, 67, 74, .7); text-align: right; font-size: .8rem; white-space: nowrap; }
+    th { color: var(--muted); font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; }
+    th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+    tbody tr:first-child { background: rgba(25, 198, 179, .1); }
+    tbody tr:last-child td { border-bottom: 0; }
+    .score { color: var(--warm); font-weight: 800; }
+    .preview-footer { display: flex; justify-content: space-between; gap: 14px; padding: 15px 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
+
+    section { padding: 72px 0; }
+    .section-kicker { color: var(--accent-2); font-size: .78rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h2 { margin: 8px 0 14px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08; letter-spacing: -.045em; }
+    .section-intro { max-width: 720px; margin: 0 0 34px; color: var(--muted); }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { padding: 25px; border: 1px solid var(--line); border-radius: 12px; background: rgba(13, 32, 38, .76); }
+    .card-number { display: block; margin-bottom: 28px; color: var(--accent-2); font-weight: 850; font-size: .82rem; }
+    .card h3 { margin: 0 0 8px; font-size: 1.06rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+    .install-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 42px; align-items: start; }
+    .steps { margin: 0; padding: 0; list-style: none; counter-reset: steps; }
+    .steps li { position: relative; padding: 0 0 25px 52px; color: var(--muted); counter-increment: steps; }
+    .steps li::before { content: counter(steps); position: absolute; left: 0; top: 0; width: 31px; height: 31px; display: grid; place-items: center; border: 1px solid var(--accent); border-radius: 50%; color: var(--accent-2); font-size: .78rem; font-weight: 850; }
+    .steps strong { color: var(--text); }
+    code { padding: 3px 7px; border: 1px solid var(--line); border-radius: 5px; background: #08171b; color: var(--accent-2); font-size: .86em; overflow-wrap: anywhere; }
+    .note { margin-top: 22px; padding: 18px; border-left: 3px solid var(--warm); background: rgba(241, 197, 111, .07); color: var(--muted); }
+
+    .metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .metric { padding: 20px 16px; border-top: 2px solid var(--accent); background: var(--panel); }
+    .metric strong { display: block; color: var(--warm); font-size: 1.5rem; line-height: 1; }
+    .metric span { display: block; margin-top: 9px; color: var(--muted); font-size: .78rem; }
+    .fine-print { margin-top: 24px; color: var(--muted); font-size: .9rem; }
+
+    .cta { padding: 44px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(120deg, var(--panel-2), var(--panel)); box-shadow: var(--shadow); display: flex; justify-content: space-between; gap: 34px; align-items: center; }
+    .cta h2 { margin-top: 0; }
+    .cta p { max-width: 670px; margin: 0; color: var(--muted); }
+    footer { padding: 35px 0 50px; color: var(--muted); font-size: .85rem; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding-top: 25px; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .install-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 65px; }
+      .cards { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .cta { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 620px) {
+      .nav-links a:not(:last-child) { display: none; }
+      .preview { overflow-x: auto; }
+      .preview table { min-width: 620px; }
+      .metrics { grid-template-columns: 1fr; }
+      h1 { font-size: 3.1rem; }
+      section { padding: 54px 0; }
+      footer .wrap { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .button { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 1.8l1.8 7 6.8 1.8-6.8 1.8-1.8 7-1.8-7-6.8-1.8 6.8-1.8L12 1.8z"/></svg>
+        </span>
+        Tonight's Best
+      </a>
+      <div class="nav-links">
+        <a href="#setup">Setup</a>
+        <a href="#scoring">Scoring</a>
+        <a href="https://github.com/CCDASTRO/TonightsBest-NINA">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">A planning plugin for N.I.N.A.</div>
+          <h1>Make tonight's sky easier to choose.</h1>
+          <p class="lede">Tonight's Best ranks deep-sky targets for your active location, telescope, camera, field of view, Moon, and observing window—then sends your selection straight to Framing Assistant.</p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/CCDASTRO/TonightsBest-NINA/releases/download/v0.1.0.0/TonightsBest.NINA.Plugin.0.1.0.0.zip">Download v0.1.0.0</a>
+            <a class="button" href="#install">Installation</a>
+          </div>
+        </div>
+
+        <div class="preview" aria-label="Example Tonight's Best target list">
+          <div class="preview-title"><strong>Tonight's Best — Top 15</strong><span>Minimum altitude 30°</span></div>
+          <div class="equipment">500 mm telescope · 167′ × 125.5′ field</div>
+          <table>
+            <thead><tr><th>Target</th><th>Type</th><th>Score</th><th>Frame</th></tr></thead>
+            <tbody>
+              <tr><td>LDN 827</td><td>Dark nebula</td><td class="score">99.2</td><td>73.4%</td></tr>
+              <tr><td>PK 72-17.1</td><td>Planetary nebula</td><td class="score">98.8</td><td>71.3%</td></tr>
+              <tr><td>Crescent Nebula</td><td>Bright nebula</td><td class="score">98.1</td><td>74.9%</td></tr>
+              <tr><td>Basel 6</td><td>Open cluster</td><td class="score">97.8</td><td>73.4%</td></tr>
+            </tbody>
+          </table>
+          <div class="preview-footer"><span>Top 15 targets for tonight</span><strong>Open in Framing Assistant →</strong></div>
+        </div>
+      </div>
+    </header>
+
+    <section aria-labelledby="workflow-title">
+      <div class="wrap">
+        <div class="section-kicker">One focused workflow</div>
+        <h2 id="workflow-title">From possibility to framed target.</h2>
+        <p class="section-intro">The plugin works with the N.I.N.A. profile you already maintain. There is no second catalog or duplicate equipment setup.</p>
+        <div class="cards">
+          <article class="card"><span class="card-number">01</span><h3>Read your setup</h3><p>Uses the active observing location, optional horizon, effective focal length, connected camera dimensions, and pixel size.</p></article>
+          <article class="card"><span class="card-number">02</span><h3>Rank the whole sky</h3><p>Evaluates the N.I.N.A. Sky Atlas against visibility, altitude, Moon clearance, framing, and object type.</p></article>
+          <article class="card"><span class="card-number">03</span><h3>Frame your choice</h3><p>Select one of the Top 15 and open it in Framing Assistant for rotation, mosaic planning, and Advanced Sequencer handoff.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="install" aria-labelledby="install-title">
+      <div class="wrap install-grid">
+        <div>
+          <div class="section-kicker">Install</div>
+          <h2 id="install-title">Ready in a few minutes.</h2>
+          <p class="section-intro">Requires N.I.N.A. 3.2.0.9001 or later. Install through N.I.N.A.'s Plugin Manager when listed, or use the current release manually.</p>
+          <a class="button primary" href="https://github.com/CCDASTRO/TonightsBest-NINA/releases">View releases</a>
+        </div>
+        <div>
+          <ol class="steps">
+            <li><strong>Download</strong> the current ZIP from GitHub Releases.</li>
+            <li><strong>Close N.I.N.A.</strong> before copying plugin files.</li>
+            <li>Create <code>%LOCALAPPDATA%\NINA\Plugins\3.0.0\Tonight's Best</code>.</li>
+            <li><strong>Extract both DLL files</strong> from the ZIP directly into that folder.</li>
+            <li><strong>Restart N.I.N.A.</strong> and locate Tonight's Best in the Imaging workspace.</li>
+          </ol>
+          <div class="note">Do not keep a manual copy and a Plugin Manager copy installed at the same time.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="setup" aria-labelledby="setup-title">
+      <div class="wrap">
+        <div class="section-kicker">Before you refresh</div>
+        <h2 id="setup-title">Use the profile you trust.</h2>
+        <p class="section-intro">Set your latitude and longitude, enter the telescope's effective focal length, and connect the selected camera so N.I.N.A. can report its sensor dimensions and pixel size. Simulator equipment works too.</p>
+        <div class="cards">
+          <article class="card"><span class="card-number">Location</span><h3>Where you observe</h3><p>Latitude, longitude, elevation, and an optional custom horizon come directly from the active profile.</p></article>
+          <article class="card"><span class="card-number">Optics</span><h3>What the sky looks like</h3><p>Use the effective focal length after any reducer or Barlow so framing calculations match the actual imaging train.</p></article>
+          <article class="card"><span class="card-number">Camera</span><h3>How much fits</h3><p>Connect the camera to provide width, height, and pixel size for an accurate rectangular field of view.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="scoring" aria-labelledby="scoring-title">
+      <div class="wrap">
+        <div class="section-kicker">Transparent scoring</div>
+        <h2 id="scoring-title">A recommendation you can understand.</h2>
+        <p class="section-intro">Every target receives a score out of 100. The weights favor usable imaging time and clear framing while accounting for the Moon and target altitude.</p>
+        <div class="metrics">
+          <div class="metric"><strong>35</strong><span>Visibility above minimum altitude</span></div>
+          <div class="metric"><strong>25</strong><span>Moon clearance and illumination</span></div>
+          <div class="metric"><strong>25</strong><span>Framing suitability</span></div>
+          <div class="metric"><strong>10</strong><span>Maximum altitude</span></div>
+          <div class="metric"><strong>5</strong><span>Object-interest weighting</span></div>
+        </div>
+        <p class="fine-print">Frame coverage is an estimate based on the object's catalog ellipse and your rectangular camera field. A value above 100% means the catalog footprint is larger than one frame; faint extensions may not be represented in catalog dimensions.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="cta-title">
+      <div class="wrap">
+        <div class="cta">
+          <div><h2 id="cta-title">Spend less time searching. Start framing.</h2><p>Open the panel, choose your minimum altitude, refresh the Top 15, and send the target you want to Framing Assistant.</p></div>
+          <a class="button primary" href="https://github.com/CCDASTRO/TonightsBest-NINA/releases/download/v0.1.0.0/TonightsBest.NINA.Plugin.0.1.0.0.zip">Download plugin</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap"><span>Tonight's Best · Chuck Faranda / CCDASTRO</span><span>Open source under the MIT License</span></div>
+  </footer>
+</body>
+</html>

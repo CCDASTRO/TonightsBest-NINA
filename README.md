@@ -5,6 +5,58 @@ the current night using the active N.I.N.A. profile, equipment, sky atlas, Moon,
 and visibility window. It provides a dockable **Top 15** panel with one-click
 handoff to the Framing Assistant and then the Advanced Sequencer.
 
+## Install
+
+Tonight's Best requires **N.I.N.A. 3.2.0.9001 or later**.
+
+### From a GitHub release
+
+1. Download `TonightsBest.NINA.Plugin.<version>.zip` from this repository's
+   [Releases](https://github.com/CCDASTRO/TonightsBest-NINA/releases) page.
+2. Close N.I.N.A.
+3. Create this folder if it does not exist:
+   `%LOCALAPPDATA%\NINA\Plugins\3.0.0\Tonight's Best`
+4. Extract `TonightsBest.Core.dll` and `TonightsBest.NINA.Plugin.dll` from the
+   ZIP directly into that folder.
+5. Start N.I.N.A. Open **Imaging**, locate **Tonight's Best** among the dockable
+   panels, and place or resize it as desired.
+
+N.I.N.A. uses the `3.0.0` compatibility folder for 3.x plugins even though this
+plugin requires N.I.N.A. 3.2 or newer.
+
+### Build and install from source
+
+Run `./packaging/build-package.ps1`, then follow the same steps using the ZIP
+created in `artifacts`.
+
+## Required setup
+
+Tonight's Best reads N.I.N.A.'s active profile; it does not maintain a duplicate
+equipment or location configuration. Before refreshing:
+
+1. Set the observing latitude, longitude, elevation, and optional custom horizon
+   in the active N.I.N.A. profile.
+2. Select a telescope and enter its effective focal length, including any reducer
+   or Barlow effect.
+3. Select and connect the camera. N.I.N.A. must report its sensor width, sensor
+   height, and pixel size so the plugin can calculate the field of view.
+4. Simulator equipment can be used to evaluate the plugin without physical
+   hardware.
+
+## Use
+
+1. Open the **Tonight's Best — Top 15** panel in the Imaging workspace.
+2. Set the minimum acceptable target altitude; the default is 30°.
+3. Click **Refresh Top 15**.
+4. Compare object type, overall score, estimated frame coverage, hours above the
+   minimum altitude, maximum altitude, Moon separation, and magnitude.
+5. Select a row and click **Open in Framing Assistant**.
+6. Adjust rotation, framing, or mosaic settings, then use Framing Assistant's
+   normal controls to add the target to the Advanced Sequencer.
+
+Frame coverage over 100% means the catalog footprint is larger than the current
+camera field. Catalog sizes are estimates and may omit very faint extensions.
+
 ## Status
 
 This repository contains a tested **0.1.0 development preview** with the

@@ -23,6 +23,7 @@ public sealed class TonightsBestDockableVM : DockableVM, ICameraConsumer, ITeles
     private readonly IFramingAssistantGateway framingGateway;
     private readonly TonightBestService service;
     private CancellationTokenSource? refreshCancellation;
+    private int refreshGeneration;
     private CameraInfo? cameraInfo;
     private TelescopeInfo? telescopeInfo;
     private RankedTarget? selectedTarget;
@@ -100,6 +101,7 @@ public sealed class TonightsBestDockableVM : DockableVM, ICameraConsumer, ITeles
     }
 
     private async Task<bool> RefreshAsync() {
+        var generation = Interlocked.Increment(ref refreshGeneration);
         refreshCancellation?.Cancel();
         refreshCancellation?.Dispose();
         refreshCancellation = new CancellationTokenSource();
@@ -107,19 +109,20 @@ public sealed class TonightsBestDockableVM : DockableVM, ICameraConsumer, ITeles
         Status = "Searching N.I.N.A. Sky Atlas and scoring targets…";
         try {
             var ranked = await service.GetTopAsync(15, refreshCancellation.Token);
+            if (generation != refreshGeneration) return false;
             Targets.Clear();
             foreach (var target in ranked) Targets.Add(target);
             SelectedTarget = Targets.FirstOrDefault();
             Status = Targets.Count == 0 ? "No targets meet the current altitude requirement." : $"Top {Targets.Count} targets for tonight.";
             return true;
         } catch (OperationCanceledException) {
-            Status = "Refresh canceled.";
+            if (generation == refreshGeneration) Status = "Refresh canceled.";
             return false;
         } catch (Exception ex) {
-            Status = ex.Message;
+            if (generation == refreshGeneration) Status = ex.Message;
             return false;
         } finally {
-            IsBusy = false;
+            if (generation == refreshGeneration) IsBusy = false;
         }
     }
 

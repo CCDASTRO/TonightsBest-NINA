@@ -1,18 +1,19 @@
 # Tonight's Best for N.I.N.A.
 
-Tonight's Best is a planned N.I.N.A. 3.2 plugin that ranks deep-sky targets for
+Tonight's Best is a N.I.N.A. 3.2 plugin that ranks deep-sky targets for
 the current night using the active N.I.N.A. profile, equipment, sky atlas, Moon,
 and visibility window. The goal is a dockable **Top 15** panel with one-click
 handoff to the Framing Assistant and then the Advanced Sequencer.
 
 ## Status
 
-This repository contains a buildable **0.1.0 development preview**: the tested
-scoring foundation, N.I.N.A. 3.2 adapters, dockable panel, and Framing Assistant
-handoff. Hardware-backed testing inside N.I.N.A. is still required before the
-first public release.
+This repository contains a buildable **0.1.0 development preview** with the
+scoring engine, live N.I.N.A. 3.2 adapters, dockable panel, and Framing Assistant
+handoff. It has been compiled, unit tested, queried against an installed N.I.N.A.
+Sky Atlas, and loaded in N.I.N.A. A final test with a connected camera and the
+user's active telescope profile is required before the first public release.
 
-## Planned user workflow
+## User workflow
 
 1. Open the **Tonight's Best** dockable panel in N.I.N.A.
 2. Confirm the observing window and minimum altitude inherited from the active profile.
@@ -68,6 +69,11 @@ adapter     and equipment   gateway
 - Populate N.I.N.A.'s Framing Assistant with the selected `DeepSkyObject` rather
   than implement a second framing or sequencing UI.
 
+The atlas adapter deliberately does not impose a size-sorted result limit. Every
+object returned by the active N.I.N.A. Sky Atlas query remains eligible for
+visibility and framing scoring, so compact galaxies and planetary nebulae are
+not displaced by large catalog footprints.
+
 ## Build and test
 
 Prerequisite: .NET 8 SDK.
@@ -83,7 +89,13 @@ Create an installable development ZIP and manifest with:
 ```
 
 See [installation instructions](docs/INSTALLATION.md) and the
-[scoring reference](docs/SCORING.md).
+[scoring reference](docs/SCORING.md). The
+[SDK review](docs/SDK-REVIEW.md) records the official interfaces and plugin
+patterns used by this implementation.
+
+Pushing a four-part version tag such as `v0.1.0.0` runs the release workflow,
+rebuilds and tests the solution, and publishes the installable ZIP plus its
+generated manifest as GitHub release assets.
 
 ## Roadmap
 

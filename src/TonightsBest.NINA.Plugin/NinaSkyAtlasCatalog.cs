@@ -22,9 +22,7 @@ internal sealed class NinaSkyAtlasCatalog : ISkyAtlasCatalog {
 
     public async Task<IReadOnlyList<SkyTarget>> SearchAsync(CancellationToken cancellationToken) {
         var search = new DatabaseInteraction.DeepSkyObjectSearchParams {
-            DsoTypes = Array.Empty<string>(),
-            Limit = 1500,
-            SearchOrder = new DatabaseInteraction.DeepSkyObjectSearchOrder { Field = "sizemax", Direction = "DESC" }
+            DsoTypes = Array.Empty<string>()
         };
         var objects = await database().GetDeepSkyObjects(
             imageFactory: null!, horizon(), search, cancellationToken).ConfigureAwait(false);
@@ -34,7 +32,7 @@ internal sealed class NinaSkyAtlasCatalog : ISkyAtlasCatalog {
     private static SkyTarget Map(DeepSkyObject value) => new(
         value.Id, value.Name, FriendlyObjectType(value.DSOType), value.Coordinates.RADegrees,
         value.Coordinates.Dec, (value.Size ?? 0) / 60d, (value.SizeMin ?? value.Size ?? 0) / 60d,
-        value.Magnitude, value.Constellation ?? string.Empty);
+        value.Magnitude, value.Constellation ?? string.Empty, value.DSOType ?? string.Empty);
 
     private static string FriendlyObjectType(string? code) {
         if (string.IsNullOrWhiteSpace(code)) return "Other";

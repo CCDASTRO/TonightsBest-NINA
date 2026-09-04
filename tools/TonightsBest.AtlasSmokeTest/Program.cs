@@ -11,8 +11,10 @@ try {
     var targets = await catalog.SearchAsync(CancellationToken.None);
     if (targets.Count == 0) throw new InvalidOperationException("N.I.N.A. Sky Atlas returned no targets.");
     var typed = targets.Count(target => !string.IsNullOrWhiteSpace(target.ObjectType));
+    var nativeTyped = targets.Count(target => !string.IsNullOrWhiteSpace(target.CatalogTypeCode));
     var sized = targets.Count(target => target.MajorAxisArcMinutes > 0);
-    Console.WriteLine($"Sky Atlas smoke test passed: {targets.Count} targets; {typed} typed; {sized} with dimensions.");
+    if (nativeTyped == 0) throw new InvalidOperationException("Sky Atlas returned no native object-type codes.");
+    Console.WriteLine($"Sky Atlas smoke test passed: {targets.Count} targets; {typed} friendly types; {nativeTyped} native types; {sized} with dimensions.");
     foreach (var target in targets.Take(5))
         Console.WriteLine($"{target.Name} | {target.ObjectType} | {target.MajorAxisArcMinutes:0.##}' × {target.MinorAxisArcMinutes:0.##}'");
 } finally {

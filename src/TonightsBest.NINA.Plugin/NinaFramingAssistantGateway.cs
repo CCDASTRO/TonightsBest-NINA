@@ -16,7 +16,7 @@ internal sealed class NinaFramingAssistantGateway(
         var coordinates = new Coordinates(target.RightAscensionDegrees, target.DeclinationDegrees, Epoch.J2000, Coordinates.RAType.Degrees);
         var dso = new DeepSkyObject(target.Id, coordinates, profileService.ActiveProfile.AstrometrySettings.Horizon) {
             Name = target.Name,
-            DSOType = target.ObjectType,
+            DSOType = string.IsNullOrWhiteSpace(target.CatalogTypeCode) ? target.ObjectType : target.CatalogTypeCode,
             Magnitude = target.Magnitude,
             Size = target.MajorAxisArcMinutes * 60,
             SizeMin = target.MinorAxisArcMinutes * 60,

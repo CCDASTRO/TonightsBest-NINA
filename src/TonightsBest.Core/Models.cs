@@ -31,7 +31,8 @@ public sealed record SkyTarget(
     double MajorAxisArcMinutes,
     double MinorAxisArcMinutes,
     double? Magnitude,
-    string Constellation = "");
+    string Constellation = "",
+    string CatalogTypeCode = "");
 
 public sealed record MoonState(double RightAscensionDegrees, double DeclinationDegrees, double IlluminatedFraction);
 
@@ -55,4 +56,3 @@ public sealed record RankedTarget(
     double MaximumAltitudeDegrees,
     double MoonSeparationDegrees,
     ScoreBreakdown Breakdown);
-

@@ -28,12 +28,29 @@ Future versions will then appear through N.I.N.A.'s normal plugin-update system.
 
 1. Download `TonightsBest.NINA.Plugin.<version>.zip` from this repository's
    [Releases](https://github.com/CCDASTRO/TonightsBest-NINA/releases) page.
-2. Close N.I.N.A.
-3. Create this folder if it does not exist:
-   `%LOCALAPPDATA%\NINA\Plugins\3.0.0\Tonight's Best`
-4. Extract `TonightsBest.Core.dll` and `TonightsBest.NINA.Plugin.dll` from the
-   ZIP directly into that folder.
-5. Start N.I.N.A. Open **Imaging**, locate **Tonight's Best** among the dockable
+2. Close N.I.N.A. completely before copying any plugin files.
+3. Open Windows **File Explorer** (`Windows key + E`). Click its address bar,
+   paste `%LOCALAPPDATA%\NINA\Plugins`, and press **Enter**. This opens the
+   correct N.I.N.A. plugin directory for your Windows account; you do not need
+   to find the normally hidden `AppData` folder manually.
+4. Inside `Plugins`, create a folder named `3.0.0` if it is not already there.
+   Open `3.0.0`, then create and open a folder named exactly `Tonight's Best`.
+5. Open the downloaded ZIP and copy these two files directly into the
+   `Tonight's Best` folder:
+
+   - `TonightsBest.Core.dll`
+   - `TonightsBest.NINA.Plugin.dll`
+
+   The finished layout must be:
+
+   ```text
+   %LOCALAPPDATA%\NINA\Plugins\3.0.0\Tonight's Best\
+   ├── TonightsBest.Core.dll
+   └── TonightsBest.NINA.Plugin.dll
+   ```
+
+   Do not leave the DLLs inside the ZIP or an additional nested folder.
+6. Start N.I.N.A. Open **Imaging**, locate **Tonight's Best** among the dockable
    panels, and place or resize it as desired.
 
 N.I.N.A. uses the `3.0.0` compatibility folder for 3.x plugins even though this

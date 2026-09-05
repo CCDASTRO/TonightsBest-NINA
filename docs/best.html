@@ -233,11 +233,13 @@
         <div>
           <ol class="steps">
             <li><strong>Download</strong> the current ZIP from GitHub Releases.</li>
-            <li><strong>Close N.I.N.A.</strong> before copying plugin files.</li>
-            <li>Create <code>%LOCALAPPDATA%\NINA\Plugins\3.0.0\Tonight's Best</code>.</li>
-            <li><strong>Extract both DLL files</strong> from the ZIP directly into that folder.</li>
+            <li><strong>Close N.I.N.A. completely</strong> before copying plugin files.</li>
+            <li>Open <strong>Windows File Explorer</strong>, click the address bar, paste <code>%LOCALAPPDATA%\NINA\Plugins</code>, and press <strong>Enter</strong>. This goes directly to your N.I.N.A. plugin folder even though <code>AppData</code> is normally hidden.</li>
+            <li>Inside <code>Plugins</code>, create and open <code>3.0.0</code> if needed. Then create and open a folder named exactly <code>Tonight's Best</code>.</li>
+            <li>Open the ZIP and copy <code>TonightsBest.Core.dll</code> and <code>TonightsBest.NINA.Plugin.dll</code> directly into <code>Tonight's Best</code>. Do not put them in another nested folder.</li>
             <li><strong>Restart N.I.N.A.</strong> and locate Tonight's Best in the Imaging workspace.</li>
           </ol>
+          <div class="note"><strong>Final folder:</strong> <code>%LOCALAPPDATA%\NINA\Plugins\3.0.0\Tonight's Best</code>. The two DLL files should be visible immediately inside it.</div>
           <div class="note">Do not keep a manual copy and a Plugin Manager copy installed at the same time.</div>
         </div>
       </div>
